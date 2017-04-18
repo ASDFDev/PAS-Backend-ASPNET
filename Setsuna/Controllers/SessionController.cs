@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OtpNet;
 
 namespace Setsuna.Controllers
@@ -30,9 +31,22 @@ namespace Setsuna.Controllers
 		{
 			if (Cache.secret == null)
 				return ("No secret found. <a href=./GenerateSecret>Generate secret</a>");
-			Totp OTK = new OtpNet.Totp(new ASCIIEncoding().GetBytes(Cache.secret), 5, OtpHashMode.Sha512, 8, null);
-			Response.AddHeader("Refresh", "5");
-			return ("OTP generated with secret '" + Cache.secret + "': " + OTK.ComputeTotp());
+			Totp OTK = new OtpNet.Totp(new ASCIIEncoding().GetBytes(Cache.secret), 20, OtpHashMode.Sha512, 8, null);
+			Response.AddHeader("Refresh", "20");
+			TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+			int e = (int)t.TotalSeconds;
+			Cache.expiry = DateTime.Now.ToString() + " " + TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).ToString();
+			return (OTK.ComputeTotp());
+		}
+
+		public string GetResponse()
+		{
+			ClientResponse r = new ClientResponse();
+			r.operation = "TOTP_2OTK";
+			r.otp = GenerateTOTP();
+			r.time = 20;
+			r.expiry = Cache.expiry;
+			return JsonConvert.SerializeObject(r, Formatting.Indented);
 		}
 
     }
