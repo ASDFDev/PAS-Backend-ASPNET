@@ -1,0 +1,33 @@
+﻿@{
+
+	//Validation.RequireField("username", "Please enter your username.");
+	//Validation.RequireField("password", "Please enter your password.");
+
+    if (IsPost) {
+        string username = Request.Form["username"];
+        string password = Request.Form["password"];
+        // TODO: Authentication
+    }
+}
+Connection with local SQL database opened successfully!
+<div align="center">
+<form method="post" >
+	<fieldset>
+		<legend>Login to Setsuna</legend>
+		<div>
+			<label for="username">Username:</label>
+			<input type="text" name="username" value="" />
+			@Html.ValidationMessage("username")
+		</div>
+		<div>
+			<label for="password">Password:</label>
+			<input type="password" name="password" value="" />
+			@Html.ValidationMessage("password")
+		</div>
+		<div>
+			<label>&nbsp;</label>
+			<input type="submit" value="Login" value="login" />
+		</div>
+	</fieldset>
+</form>
+</div>

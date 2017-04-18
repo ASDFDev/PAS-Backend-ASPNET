@@ -1,0 +1,24 @@
+﻿@using System.Text;
+@using Newtonsoft.Json;
+@using OtpNet;
+@{
+	string otp;
+	if (Setsuna.Cache.secret == null)
+	{
+		otp = "";
+	}
+	Totp OTK = new OtpNet.Totp(new ASCIIEncoding().GetBytes(Setsuna.Cache.secret), 20, OtpHashMode.Sha512, 8, null);
+	Response.AddHeader("Refresh", "20");
+	TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
+	int e = (int)t.TotalSeconds;
+	Setsuna.Cache.expiry = DateTime.Now.ToString() + " " + TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).ToString();
+	otp = OTK.ComputeTotp();
+	ClientResponse r = new ClientResponse();
+	r.operation = "TOTP_2OTK";
+	r.otp = otp;
+	r.time = 20;
+	r.expiry = Setsuna.Cache.expiry;
+	string response = JsonConvert.SerializeObject(r, Formatting.Indented);
+}
+<h1>Json Response</h1>
+@response

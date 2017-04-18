@@ -75,6 +75,10 @@
     <Reference Include="Otp.NET">
       <HintPath>..\packages\Otp.NET.1.0.1\lib\net45\Otp.NET.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
@@ -82,6 +86,9 @@
     <Folder Include="Scripts\" />
     <Folder Include="App_Data\" />
     <Folder Include="SerializedObjects\" />
+    <Folder Include="Views\Auth\" />
+    <Folder Include="Styles\" />
+    <Folder Include="Views\Session\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -93,6 +100,8 @@
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="App_Data\Cache.cs" />
     <Compile Include="SerializedObjects\ClientResponse.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -103,12 +112,18 @@
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Styles\Setsuna.css" />
+    <Content Include="Views\Session\Index.cshtml" />
+    <Content Include="Views\Session\GenerateSecret.cshtml" />
+    <Content Include="Views\Session\GenerateTOTP.cshtml" />
+    <Content Include="Views\Auth\PostAuth.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="Enable" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
