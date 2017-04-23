@@ -7,7 +7,7 @@
 5. mono /path/to/nuget/exe restore
 6. xbuild Setsuna.sln
  
-The software would be built and you can start running the software! Go to [RUNNING.md](RUNNING.md) for more info on how to run this software.
+The software would be built and you can start running the software! Go to [SetsunaOnApache.md](SetsunOnApache.md) for more info on how to run this software on Apache. You should only use XSP for debugging purpose. See [SetsunaOnXsp.md](SetsunaOnXsp.md) for more info on running this software on XSP.
 
 `Note: For Debian derivatives, it is possible to run this software without pulling all of mono packages and dependencies.`
 
